@@ -1,0 +1,25 @@
+.header {
+    background-color: black;
+    color: white;
+    text-align: center;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 16px;
+};
+
+
+.logoTV {
+    height: 80px;
+    width: auto;
+}
+
+.logoTV img {
+    width: 50px;
+    margin-left: -30px;
+}
+
+
+
+ 
