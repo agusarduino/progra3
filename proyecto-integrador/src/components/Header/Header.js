@@ -18,7 +18,7 @@ function Header() {
             path: '/peliculasEnCartelera'
         }, {
             name: 'Top Rated',
-            path: '/peliculasEnCartelera'
+            path: '/peliculasTopRated'
         }, {
             name: 'Proximamente',
             path: '/peliculasProximamente'
