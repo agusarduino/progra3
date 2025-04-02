@@ -4,7 +4,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './screens/Home/Home';
 import NotFound from './components/NotFound/NotFound';
-
+import Imagenes from './components/Peliculas';
 
 function App() {
 
