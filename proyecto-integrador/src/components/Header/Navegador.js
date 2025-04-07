@@ -4,7 +4,7 @@ function Navegador(props) {
     return (
         <ul className="header">
             {
-                props.barraNavegador.map((elemento) => <li> {elemento.name}</li>)
+                props.barraNavegador.map((elemento, i) => <li key={elemento + i}> {elemento.name}</li>)
                 
             }
             
