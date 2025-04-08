@@ -5,7 +5,6 @@ import Footer from "../../components/Footer/Footer";
 function Home(){
     return(
         <React.Fragment>
-            <Header />
             <Footer />
         </React.Fragment>
     )

@@ -1,8 +1,15 @@
 .footer {
     background-color: black;
+    padding: 0.05% 0;
+    padding-bottom: 0%;
     text-align: center;
-    padding: 10px 0;
-    color: white;
-    bottom: 0;
+    font-family: 'Abel';
+    bottom: 0%;
     width: 100%;
+    color: white;
+    margin-top: auto;
+    left: 0;
+    font-size: 90%;
+    position: fixed;
+    margin-top: 1%;
 }
