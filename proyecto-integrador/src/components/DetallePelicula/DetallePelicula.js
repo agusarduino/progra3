@@ -20,13 +20,13 @@ class DetallePelicula extends Component {
     componentDidMount(props) {
         const id = this.props.id; 
         const apiKey = 'd248f742e95238b743a56f9e1b92dc9b';
-        const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
+        const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=es-MX`;
         this.llamadoApi(url, (data) => {
             this.setState({ pelicula: data });
             console.log(data); 
         });
 
-        const imagesUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`;
+        const imagesUrl = `https://api.themoviedb.org/3/movie/${id}/images?api_key=${apiKey}`;
         console.log(imagesUrl)
 
         this.llamadoApi(imagesUrl, (data) => {
