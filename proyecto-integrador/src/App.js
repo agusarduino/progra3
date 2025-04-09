@@ -6,7 +6,7 @@ import Home from './screens/Home/Home';
 import Detalle from './screens/Detalle/Detalle';
 
 import NotFound from './screens/NotFound/NotFound';
-import Imagenes from './components/Peliculas';
+import Imagenes from './components/Home/Home';
 
 function App() {
 
