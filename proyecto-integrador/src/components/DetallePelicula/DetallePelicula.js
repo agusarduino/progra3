@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import './styles.css';
 
 class DetallePelicula extends Component {
     constructor(props) {
         super(props)
         this.state={
             pelicula: '',
+            imagenes: ''
         }
     }
 
@@ -16,34 +18,41 @@ class DetallePelicula extends Component {
     }
 
     componentDidMount(props) {
-        const id = this.props.match.params.id;
-         // ver esto de api porque no anda
-        const url = ``;
+        const id = this.props.id; 
+        const apiKey = 'd248f742e95238b743a56f9e1b92dc9b';
+        const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=es-MX`;
         this.llamadoApi(url, (data) => {
             this.setState({ pelicula: data });
             console.log(data); 
         });
+
+        const imagesUrl = `https://api.themoviedb.org/3/movie/${id}/images?api_key=${apiKey}`;
+        console.log(imagesUrl)
+
+        this.llamadoApi(imagesUrl, (data) => {
+            this.setState({ imagenes: data});
+        });
     }
 
     agregarFavoritos(id) {
-        
+        // completar despues
     }
 
     render () {
         const { pelicula } = this.state;
         
         return(
-            <div>
-                
-                <img src='https://api.themoviedb.org/3/collection/`${pelicula.poster.path}`/images' alt='Portada de ${}'></img>
-                <h1>{pelicula.title}</h1>
-                <p>Rating: {pelicula.vote_average}</p>
-                <p>Fecha de estreno: {pelicula.release_date}</p>
-                <p>Duración: {pelicula.runtime} minutos</p>
-                <p>Sinópsis: {pelicula.overview}</p>
-                <p>Géneros: {pelicula.genres?.map((genero)=> genero.name)} </p>
-                <button> Agregar a favoritos </button>
-
+            <div className='contenedor'>
+                <img src={`https://image.tmdb.org/t/p/w500${pelicula.poster_path}`} alt={`Póster de ${pelicula.title}`} className="imagenDetalle"></img>
+                <div className='contenedor2'>
+                    <h1>{pelicula.title}</h1>
+                    <p>Rating: {pelicula.vote_average}</p>
+                    <p>Fecha de estreno: {pelicula.release_date}</p>
+                    <p>Duración: {pelicula.runtime} minutos</p>
+                    <p>Sinópsis: {pelicula.overview}</p>
+                    <p>Géneros:  </p>
+                    <button> Agregar a favoritos </button>
+                </div>
             </div>
         )
     }

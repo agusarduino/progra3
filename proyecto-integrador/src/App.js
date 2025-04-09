@@ -3,8 +3,9 @@ import {Switch, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './screens/Home/Home';
-import Detalle from './components/DetallePelicula/DetallePelicula';
-import NotFound from './components/NotFound/NotFound';
+import Detalle from './screens/Detalle/Detalle';
+
+import NotFound from './screens/NotFound/NotFound';
 import Imagenes from './components/Peliculas';
 
 function App() {

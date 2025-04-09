@@ -1,7 +1,9 @@
+import './styles.css';
+
 function NotFound() {
     return (
         <div>
-            <h1>Error 404 Page not found</h1>
+            <h1 className="error">Error 404 Page not found</h1>
         </div>
     )
 };
