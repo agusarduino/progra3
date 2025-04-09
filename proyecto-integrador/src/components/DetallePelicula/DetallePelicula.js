@@ -32,6 +32,7 @@ class DetallePelicula extends Component {
         this.llamadoApi(imagesUrl, (data) => {
             this.setState({ imagenes: data});
         });
+        
     }
 
     agregarFavoritos(id) {
@@ -50,7 +51,7 @@ class DetallePelicula extends Component {
                     <p>Fecha de estreno: {pelicula.release_date}</p>
                     <p>Duración: {pelicula.runtime} minutos</p>
                     <p>Sinópsis: {pelicula.overview}</p>
-                    <p>Géneros:  </p>
+                    <p>Géneros: {pelicula.genres && pelicula.genres.map(g => g.name).join(' y ')}</p>
                     <button> Agregar a favoritos </button>
                 </div>
             </div>

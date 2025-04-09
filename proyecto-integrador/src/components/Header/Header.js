@@ -17,12 +17,6 @@ function Header() {
             name: 'En cartelera',
             path: '/peliculasEnCartelera'
         }, {
-            name: 'Top Rated',
-            path: '/peliculasTopRated'
-        }, {
-            name: 'Proximamente',
-            path: '/peliculasProximamente'
-        }, {
             name: 'Ver Todas',
             path: '/verTodas'
         }
