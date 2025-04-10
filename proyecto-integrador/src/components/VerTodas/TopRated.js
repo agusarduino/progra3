@@ -19,7 +19,7 @@ class Peliculas extends Component {
         fetch(url)
             .then(response => response.json())
             .then((data) => this.setState({
-                [stateKey]: data.results.slice(0, 5),
+                [stateKey]: data.results,
                 [backupKey]: data.results
             }))
             .catch(error => console.error(error))
@@ -27,24 +27,17 @@ class Peliculas extends Component {
 
     componentDidMount() {
         const apiKey = 'd248f742e95238b743a56f9e1b92dc9b';
-        const popularesUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=es-MX&page=1`;
-        this.apiCall(popularesUrl, 'populares', 'backupPopulares');
 
         const topRatedUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=es-MX&page=1`;
         this.apiCall(topRatedUrl, 'topRated', 'backupTopRated');
     }
 
     filtrarPeliculas(busquedaUsuario) {
-        const popularesFiltradas = this.state.backupPopulares.filter(
-            (pelicula) => pelicula.title.toLowerCase().includes(busquedaUsuario.toLowerCase())
-        ).slice(0, 5);
-
         const topRatedFiltradas = this.state.backupTopRated.filter(
             (pelicula) => pelicula.title.toLowerCase().includes(busquedaUsuario.toLowerCase())
-        ).slice(0, 5);
+        );
 
         this.setState({
-            populares: popularesFiltradas,
             topRated: topRatedFiltradas
         });
     }
@@ -53,24 +46,6 @@ class Peliculas extends Component {
         return (
             <div>
                 <FiltroPeliculas filtro={(busqueda) => this.filtrarPeliculas(busqueda)} />
-
-                <h1>Populares</h1>
-                <div className="movie-list">
-                    {this.state.populares.length === 0 ?
-                        <h1>Cargando películas populares...</h1>
-                        :
-                        this.state.populares.map((pelicula) => (
-                            <div key={pelicula.id} className="movie-card-container">
-                                <MovieCard data={pelicula} />
-                                <Link to={`/detalle/${pelicula.id}`}>
-                                    <button className="detalle-button">
-                                        Ver Detalle
-                                    </button>
-                                </Link>
-                            </div>
-                        ))
-                    }
-                </div>
 
                 <h1>Top Rated</h1>
                 <div className="movie-list">
