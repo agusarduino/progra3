@@ -24,19 +24,62 @@ class DetallePelicula extends Component {
         this.llamadoApi(url, (data) => {
             this.setState({ pelicula: data });
             console.log(data); 
-        });
+        })
 
         const imagesUrl = `https://api.themoviedb.org/3/movie/${id}/images?api_key=${apiKey}`;
         console.log(imagesUrl)
 
         this.llamadoApi(imagesUrl, (data) => {
             this.setState({ imagenes: data});
-        });
+        })
+
+        let storage = localStorage.getItem('favoritos');
+
+        if(storage !== null){
+            let storageParseado = JSON.parse(storage);
+            
+            let idParseado = storageParseado.includes(this.state.pelicula.id)
+
+            if(idParseado){
+                this.setState({esFavorito: true})
+              }
+        }
         
     }
 
     agregarFavoritos(id) {
-        // completar despues
+        let storage = localStorage.getItem('favoritos');
+
+        if(storage !== null){
+            let storageParseado = JSON.parse(storage)
+            storageParseado.push(id)
+            let storageStringificado = JSON.stringify(storageParseado)
+            localStorage.setItem('favoritos', storageStringificado)
+          } else {
+            let primerID = [id]
+            let storageStringificado = JSON.stringify(primerID)
+            localStorage.setItem('favoritos', storageStringificado)
+          }
+    
+          this.setState({
+            esFavorito: true
+          })
+    }
+
+    sacarFavoritos(id) {
+        let storage = localStorage.getItem('favoritos');
+        
+        if (storage != null) {
+            let storageParseado = JSON.parse(storage);
+            let filtrarStorage = storageParseado.filter((elemento) => elemento != id);
+            let storageStrinficado = JSON.stringify(filtrarStorage);
+            localStorage.setItem('favoritos', storageStrinficado);
+
+            this.setState({
+                esFavorito: false
+            })
+        }
+
     }
 
     render () {
@@ -52,7 +95,14 @@ class DetallePelicula extends Component {
                     <p>Duración: {pelicula.runtime} minutos</p>
                     <p>Sinópsis: {pelicula.overview}</p>
                     <p>Géneros: {pelicula.genres && pelicula.genres.map(g => g.name).join(' y ')}</p>
-                    <button> Agregar a favoritos </button>
+                    {
+                        this.state.esFavorito ? 
+                        <button onClick={() => this.sacarFavoritos(this.state.pelicula.id)}> Sacar de favoritos </button>
+                        :
+                        <button onClick={() => this.agregarFavoritos(this.state.pelicula.id)}> Agregar a favoritos </button>
+                       
+                    }
+                    
                 </div>
             </div>
         )
