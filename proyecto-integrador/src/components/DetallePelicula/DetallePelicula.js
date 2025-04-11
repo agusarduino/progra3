@@ -71,7 +71,7 @@ class DetallePelicula extends Component {
         
         if (storage != null) {
             let storageParseado = JSON.parse(storage);
-            let filtrarStorage = storageParseado.filter((elemento) => elemento != id);
+            let filtrarStorage = storageParseado.filter((elemento) => elemento !== id);
             let storageStrinficado = JSON.stringify(filtrarStorage);
             localStorage.setItem('favoritos', storageStrinficado);
 
@@ -82,27 +82,32 @@ class DetallePelicula extends Component {
 
     }
 
-    render () {
+    render() {
         const { pelicula } = this.state;
+        const esScreenFavoritos = this.props.esScreenFavoritos; 
         
         return(
             <div className='contenedor'>
                 <img src={`https://image.tmdb.org/t/p/w500${pelicula.poster_path}`} alt={`Póster de ${pelicula.title}`} className="imagenDetalle"></img>
                 <div className='contenedor2'>
                     <h1>{pelicula.title}</h1>
-                    <p>Rating: {pelicula.vote_average}</p>
-                    <p>Fecha de estreno: {pelicula.release_date}</p>
-                    <p>Duración: {pelicula.runtime} minutos</p>
-                    <p>Sinópsis: {pelicula.overview}</p>
-                    <p>Géneros: {pelicula.genres && pelicula.genres.map(g => g.name).join(' y ')}</p>
+                    
+                    {!esScreenFavoritos && ( 
+                        <>
+                            <p>Rating: {pelicula.vote_average}</p>
+                            <p>Fecha de estreno: {pelicula.release_date}</p>
+                            <p>Duración: {pelicula.runtime} minutos</p>
+                            <p>Sinópsis: {pelicula.overview}</p>
+                            <p>Géneros: {pelicula.genres && pelicula.genres.map(g => g.name).join(' y ')}</p>
+                        </>
+                    )}
+                    
                     {
-                        this.state.esFavorito ? 
-                        <button onClick={() => this.sacarFavoritos(this.state.pelicula.id)}> Sacar de favoritos </button>
+                        esScreenFavoritos || this.state.esFavorito ? 
+                        <button onClick={() => this.sacarFavoritos(this.state.pelicula.id)} className='boton-ver-detalle'> Sacar de favoritos </button>
                         :
                         <button onClick={() => this.agregarFavoritos(this.state.pelicula.id)}> Agregar a favoritos </button>
-                       
                     }
-                    
                 </div>
             </div>
         )

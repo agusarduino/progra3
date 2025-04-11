@@ -7,7 +7,6 @@ function Home(){
     return(
         <React.Fragment>
             <Peliculas />
-            <Footer />
         </React.Fragment>
     )
 }
