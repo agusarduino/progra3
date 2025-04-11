@@ -21,30 +21,27 @@ class DetallePelicula extends Component {
         const id = this.props.id; 
         const apiKey = 'd248f742e95238b743a56f9e1b92dc9b';
         const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=es-MX`;
+        
         this.llamadoApi(url, (data) => {
-            this.setState({ pelicula: data });
+            this.setState({ pelicula: data }, () => {
+                let storage = localStorage.getItem('favoritos');
+                if(storage !== null){
+                    let storageParseado = JSON.parse(storage);
+                    let idParseado = storageParseado.includes(data.id);
+                    if(idParseado){
+                        this.setState({esFavorito: true});
+                    }
+                }
+            });
             console.log(data); 
-        })
-
+        });
+    
         const imagesUrl = `https://api.themoviedb.org/3/movie/${id}/images?api_key=${apiKey}`;
-        console.log(imagesUrl)
-
+        console.log(imagesUrl);
+    
         this.llamadoApi(imagesUrl, (data) => {
             this.setState({ imagenes: data});
-        })
-
-        let storage = localStorage.getItem('favoritos');
-
-        if(storage !== null){
-            let storageParseado = JSON.parse(storage);
-            
-            let idParseado = storageParseado.includes(this.state.pelicula.id)
-
-            if(idParseado){
-                this.setState({esFavorito: true})
-              }
-        }
-        
+        });
     }
 
     agregarFavoritos(id) {
