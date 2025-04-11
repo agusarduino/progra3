@@ -58,9 +58,11 @@ class PeliculasFavoritas extends Component {
                                 esScreenFavoritos={true}
                             />
                             <div>
-                                <Link to={`/detalle/${elemento.id}`} className="boton-ver-detalle">
-                                    Ver Detalle
-                                </Link>
+                                <button>
+                                    <Link to={`/detalle/${elemento.id}`} className="boton-ver-detalle">
+                                        Ver Detalle
+                                    </Link>
+                                </button>
                             </div>
                         </div>
                     ))

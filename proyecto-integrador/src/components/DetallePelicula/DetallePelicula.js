@@ -101,7 +101,7 @@ class DetallePelicula extends Component {
                     
                     {
                         esScreenFavoritos || this.state.esFavorito ? 
-                        <button onClick={() => this.sacarFavoritos(this.state.pelicula.id)} className='boton-ver-detalle'> Sacar de favoritos </button>
+                        <button onClick={() => this.sacarFavoritos(this.state.pelicula.id)}> Sacar de favoritos </button>
                         :
                         <button onClick={() => this.agregarFavoritos(this.state.pelicula.id)}> Agregar a favoritos </button>
                     }
