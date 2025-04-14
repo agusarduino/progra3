@@ -44,13 +44,25 @@ class PeliculasFavoritas extends Component {
     }
 
     render() {
+        const { peliculasFavorito, hayPeliculasEnFavoritos } = this.state;
+      
+        const storageFavoritos = localStorage.getItem('favoritos');
+        const hayFavoritosEnStorage = storageFavoritos && JSON.parse(storageFavoritos).length > 0;
+        
+        if (hayFavoritosEnStorage && peliculasFavorito.length === 0) {
+            return <div>
+                    <img src="/gif/loader.gif"></img>
+                    <h1>Cargando favoritos...</h1>
+                </div>
+        }
+
         return (
             <div>
                 <h1>Películas Favoritas</h1>
                 {
-                    this.state.peliculasFavorito.length > 0 
+                    peliculasFavorito.length > 0 
                     ?
-                    this.state.peliculasFavorito.map((elemento, idx) => (
+                    peliculasFavorito.map((elemento, idx) => (
                         <div key={idx + elemento.id}>
                             <DetallePelicula 
                                 id={elemento.id}
@@ -67,10 +79,8 @@ class PeliculasFavoritas extends Component {
                         </div>
                     ))
                     :
-                    this.state.hayPeliculasEnFavoritos === false ? 
-                        <h2>No hay películas en favoritos</h2>
-                    :
-                    <h1>Cargando</h1>
+                    !hayPeliculasEnFavoritos && 
+                    <h2>No hay películas en favoritos</h2>
                 }
             </div>
         )

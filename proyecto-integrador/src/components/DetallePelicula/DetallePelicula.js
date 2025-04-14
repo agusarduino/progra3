@@ -5,8 +5,8 @@ class DetallePelicula extends Component {
     constructor(props) {
         super(props)
         this.state={
-            pelicula: '',
-            imagenes: ''
+            pelicula: [],
+            imagenes: []
         }
     }
 
@@ -82,6 +82,14 @@ class DetallePelicula extends Component {
     render() {
         const { pelicula } = this.state;
         const esScreenFavoritos = this.props.esScreenFavoritos; 
+
+
+        if (pelicula.length === 0) {
+            return <div>
+                    <img src="/gif/loader.gif"></img>
+                    <h1>Cargando detalle de película...</h1>
+                </div>
+        }
         
         return(
             <div className='contenedor'>
@@ -95,7 +103,7 @@ class DetallePelicula extends Component {
                             <p>Fecha de estreno: {pelicula.release_date}</p>
                             <p>Duración: {pelicula.runtime} minutos</p>
                             <p>Sinópsis: {pelicula.overview}</p>
-                            <p>Géneros: {pelicula.genres && pelicula.genres.map(g => g.name).join(' y ')}</p>
+                            <p>Géneros: {pelicula.genres && pelicula.genres.map(genero => genero.name).join(' y ')}</p>
                         </>
                     )}
                     
@@ -106,6 +114,7 @@ class DetallePelicula extends Component {
                         <button onClick={() => this.agregarFavoritos(this.state.pelicula.id)}> Agregar a favoritos </button>
                     }
                 </div>
+                
             </div>
         )
     }
