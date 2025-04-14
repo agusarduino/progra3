@@ -70,7 +70,10 @@ class Peliculas extends Component {
                 
                 <div className="movie-list">
                     {this.state.topRated.length === 0 ?
+                        <div>
+                        <img src="/gif/loader.gif"></img>
                         <h1>Cargando películas mejor valoradas...</h1>
+                    </div>
                         :
                         this.state.topRated.map((pelicula) => (
                             <div key={pelicula.id} className="movie-card-container">

@@ -16,9 +16,6 @@ function Header() {
         }, {
             name: 'Top Rated',
             path: '/topRated'
-        }, {
-            name: 'Ver Todas',
-            path: '/verTodas'
         }
     ]
 

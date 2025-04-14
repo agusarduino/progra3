@@ -70,7 +70,10 @@ class Populares extends Component {
                 
                 <div className="movie-list">
                     {this.state.populares.length === 0 ?
+                        <div>
+                        <img src="/gif/loader.gif"></img>
                         <h1>Cargando películas populares...</h1>
+                    </div>
                         :
                         this.state.populares.map((pelicula) => (
                             <div key={pelicula.id} className="movie-card-container">
