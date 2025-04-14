@@ -22,3 +22,17 @@
     order: 3;
 }
 
+@media (max-width: 480px) {
+    .contenedor {
+        padding: 15px;
+    }
+    
+    .contenedor2 h1 {
+        font-size: 1.5rem;
+    }
+    
+    button {
+        width: 100%;
+        max-width: none;
+    }
+}
