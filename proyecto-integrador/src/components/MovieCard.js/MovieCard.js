@@ -61,23 +61,21 @@ class MovieCard extends Component {
 
     render() {
         const { dataPelicula, favorito, mostrarContenido } = this.state;
-        
+
         return (
             <div className="movie-card">
                 <img src={`https://image.tmdb.org/t/p/w200${dataPelicula.poster_path}`} alt={dataPelicula.title} />
                 <h3>{dataPelicula.title}</h3>
-                
+
                 <div>
-                <div className={mostrarContenido ? '' : 'hide'}>
-                    <p>{dataPelicula.overview}</p>
+                     <button onClick={() => this.ocultar()}>
+                        {mostrarContenido ? 'Ocultar' : 'Mostrar'} Sinópsis
+                    </button>
+                    <div className={mostrarContenido ? '' : 'hide'}>
+                        <p>{dataPelicula.overview}</p>
+                    </div>
                 </div>
-                
-                <button onClick={() => this.ocultar()}>
-                    {mostrarContenido ? 'Ocultar' : 'Mostrar'} Sinópsis
-                </button>
-                
-                </div>
-                
+
                 {favorito ?
                     <button onClick={() => this.sacarDeFavoritos(dataPelicula.id)}>
                         Sacar de favoritos
@@ -87,6 +85,7 @@ class MovieCard extends Component {
                         Agregar a favoritos
                     </button>
                 }
+                
             </div>
         )
     }

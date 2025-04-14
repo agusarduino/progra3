@@ -1,6 +1,6 @@
 import { Component } from "react";
 import FiltroPeliculas from "../FiltroPeliculas/FiltroPeliculas";
-import MovieCard from "../MovieCard/MovieCard";
+import MovieCard from "../MovieCard.js/MovieCard";
 import './style.css';
 import { Link } from 'react-router-dom';
 
@@ -54,7 +54,12 @@ class Peliculas extends Component {
             <div>
                 <FiltroPeliculas filtro={(busqueda) => this.filtrarPeliculas(busqueda)} />
 
-                <h1>Populares</h1>
+                <div className="section-header">
+                    <h1>Populares</h1>
+                    <Link to="/populares" className="section-button">
+                        Ver todas
+                    </Link>
+                </div>
                 <div className="movie-list">
                     {this.state.populares.length === 0 ?
                         <h1>Cargando películas populares...</h1>
@@ -72,7 +77,12 @@ class Peliculas extends Component {
                     }
                 </div>
 
-                <h1>Top Rated</h1>
+                <div className="section-header">
+                    <h1>Top Rated</h1>
+                    <Link to="/toprated" className="section-button">
+                        Ver todas
+                    </Link>
+                </div>
                 <div className="movie-list">
                     {this.state.topRated.length === 0 ?
                         <h1>Cargando películas mejor valoradas...</h1>

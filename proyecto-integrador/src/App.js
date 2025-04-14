@@ -5,9 +5,10 @@ import Footer from './components/Footer/Footer';
 import Home from './screens/Home/Home';
 import Detalle from './screens/Detalle/Detalle';
 import Favoritos from './screens/Favoritos/Favoritos'
+import Populares from "./components/VerTodas/Populares";
+import TopRated from "./components/VerTodas/TopRated";
 
 import NotFound from './screens/NotFound/NotFound';
-import Imagenes from './components/Peliculas/Peliculas';
 
 function App() {
 
@@ -18,6 +19,8 @@ function App() {
         <Route path="/" exact={true} component={Home} />
         <Route path='/detalle/:id' component={Detalle} />
         <Route path='/favoritos' component={Favoritos} />
+        <Route path='/populares' component={Populares} />
+        <Route path='/toprated' component={TopRated} />
         <Route component={NotFound} /> 
       </Switch>
       <Footer />

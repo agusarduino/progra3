@@ -1,7 +1,8 @@
 import { Component } from "react";
 import FiltroPeliculas from "../FiltroPeliculas/FiltroPeliculas";
-import MovieCard from "../MovieCard/MovieCard";
-import './style.css';
+import MovieCard from "../MovieCard.js/MovieCard";
+import { Link } from "react-router-dom";
+import './styles.css';
 
 class Populares extends Component {
     constructor(props) {
@@ -9,7 +10,7 @@ class Populares extends Component {
         this.state = {
             populares: [],
             backupPopulares: [],
-            paginaActual: 0
+            pagActual: 0,
         }
     }
 
@@ -19,16 +20,16 @@ class Populares extends Component {
             .then((data) => this.setState({
                 [stateKey]: data.results,
                 [backupKey]: data.results,
-                paginaActual: 1,
                 peliculas: data.results,
-                backup: data.results
+                backup: data.results,
+                pagActual: 1
             }))
             .catch(error => console.error(error))
     }
 
     componentDidMount() {
         const apiKey = 'd248f742e95238b743a56f9e1b92dc9b';
-        const popularesUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=es-MX&page=1`;
+        const popularesUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=es-MX`;
         this.apiCall(popularesUrl, 'populares', 'backupPopulares');
     }
 
@@ -42,11 +43,31 @@ class Populares extends Component {
         });
     }
 
+    loadMore(){ 
+        const apiKey = 'd248f742e95238b743a56f9e1b92dc9b';
+        const nuevaPag = this.state.pagActual + 1;
+        fetch (`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${nuevaPag}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log("RESULTADOS", data.results)
+            this.setState( 
+                {backup: this.state.backupPopulares.concat(data.results),
+                populares: this.state.backupPopulares.concat(data.results),
+                pagActual: nuevaPag
+            }
+            );
+        })
+        .catch(err=> console.log(err));
+    } 
+
     render() {
         return (
             <div>
                 <FiltroPeliculas filtro={(busqueda) => this.filtrarPeliculas(busqueda)} />
-                <h1>Populares</h1>
+                <div className="section-header">
+                   <h1>Populares</h1> 
+                </div>
+                
                 <div className="movie-list">
                     {this.state.populares.length === 0 ?
                         <h1>Cargando películas populares...</h1>
@@ -63,6 +84,8 @@ class Populares extends Component {
                         ))
                     }
                 </div>
+                <button className="cargar-mas" onClick={()=> this.loadMore()}>Cargar más</button>
+
             </div>
         )
     }
